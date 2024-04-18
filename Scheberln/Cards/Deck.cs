@@ -40,4 +40,28 @@ public class Deck
             }
         }
     }
+
+    /// <summary>
+    /// Deals all cards which do currently not belong to an <see cref="IPlayer"/> evenly to the given <paramref name="players"/>.
+    /// </summary>
+    /// <param name="players">The <see cref="IPlayer"/>s the cards are dealt to.</param>
+    /// <param name="random">An optional <see cref="Random"/> to make the dealing foreseeable for testing.</param>
+    public void DealAllCards(List<IPlayer> players, Random? random = null)
+    {
+        random ??= Random.Shared;
+
+        int currentPlayerIndex = 0;
+
+        int cardsCount = _cards.Count;
+        for (int cardsAvailable = cardsCount; cardsAvailable > 0; --cardsAvailable)
+        {
+            int cardIndex = random.Next(cardsAvailable);
+            Card card = _cards[cardIndex];
+            _cards.RemoveAt(cardIndex);
+
+            players[currentPlayerIndex].Cards.Add(card);
+
+            currentPlayerIndex = (currentPlayerIndex + 1) % players.Count;
+        }
+    }
 }
