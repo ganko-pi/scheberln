@@ -1,10 +1,12 @@
-﻿namespace Scheberln;
+﻿using Scheberln.Game;
+
+namespace Scheberln;
 
 internal class Program
 {
     private static void Main()
     {
-        using Game1 game = new();
+        using GraphicalGame game = new();
         game.Run();
     }
 }
