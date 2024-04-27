@@ -51,6 +51,7 @@
         },
         {
             "label": "build-and-test",
+            "dependsOrder": "sequence",
             "dependsOn": ["build", "test"]
         }
     ]
