@@ -50,6 +50,8 @@ public class Deck
     {
         random ??= Random.Shared;
 
+        SortCardsAscending();
+
         int currentPlayerIndex = 0;
 
         int cardsCount = _cards.Count;
@@ -63,5 +65,19 @@ public class Deck
 
             currentPlayerIndex = (currentPlayerIndex + 1) % players.Count;
         }
+    }
+
+    private void SortCardsAscending()
+    {
+        _cards.Sort((cardA, cardB) => cardA.Suit.CompareTo(cardB.Suit) * 2 + cardA.Rank.CompareTo(cardB.Rank));
+    }
+
+    /// <summary>
+    /// Adds the given cards back to the deck.
+    /// </summary>
+    /// <param name="cards">The cards to add to the deck.</param>
+    public void AddCards(List<Card> cards)
+    {
+        _cards.AddRange(cards);
     }
 }
