@@ -12,4 +12,9 @@ public class FakePlayer : IPlayer
     {
         return Cards.FirstOrDefault()!;
     }
+
+    public void CardPlayed(Card card)
+    {
+        Cards.Remove(card);
+    }
 }

@@ -21,4 +21,10 @@ public interface IPlayer
     /// <param name="gameState">The current state of the game such as all played cards and the dealer.</param>
     /// <returns>A card the player wants to play.</returns>
     Card Play(GameState gameState);
+
+    /// <summary>
+    /// Informs the <see cref="IPlayer"/> that the played <paramref name="card"/> was accepted.
+    /// </summary>
+    /// <param name="card">The card the player played.</param>
+    void CardPlayed(Card card);
 }
