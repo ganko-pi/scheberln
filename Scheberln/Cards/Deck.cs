@@ -50,7 +50,7 @@ public class Deck
     {
         random ??= Random.Shared;
 
-        SortCardsAscending();
+        SortCardsAscending(_cards);
 
         int currentPlayerIndex = 0;
 
@@ -65,11 +65,16 @@ public class Deck
 
             currentPlayerIndex = (currentPlayerIndex + 1) % players.Count;
         }
+
+        foreach (IPlayer player in players)
+        {
+            SortCardsAscending(player.Cards);
+        }
     }
 
-    private void SortCardsAscending()
+    private void SortCardsAscending(List<Card> cards)
     {
-        _cards.Sort((cardA, cardB) => cardA.Suit.CompareTo(cardB.Suit) * 2 + cardA.Rank.CompareTo(cardB.Rank));
+        cards.Sort((cardA, cardB) => cardA.Suit.CompareTo(cardB.Suit) * 2 + cardA.Rank.CompareTo(cardB.Rank));
     }
 
     /// <summary>
