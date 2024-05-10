@@ -2,7 +2,7 @@ using Scheberln.Cards;
 using Scheberln.Players;
 using Scheberln.Tests.Fakes;
 
-namespace Scheberln.Tests.UnitTests.Cards.DeckTests;
+namespace Scheberln.Tests.UnitTests.Cards;
 
 public class DeckTests
 {
