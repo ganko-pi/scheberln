@@ -21,7 +21,10 @@ public class NoObersPointsCounter : IPointsCounter
     public int PointsPerTrick { get; } = -2;
 
     /// <inheritdoc/>
-    /// <exception cref="ArgumentException">Exception if passed objective in <paramref name="gameState"/> does not match <see cref="Objective"/>.</exception>
+    /// <exception cref="ArgumentException">
+    /// Exception if passed objective in <paramref name="gameState"/> does not match <see cref="Objective"/>
+    /// or if the passed cards in <paramref name="gameState"/> contain <see langword="null"/>.
+    /// </exception>
     public Dictionary<IPlayer, int> CountPointsAfterDeal(GameState gameState)
     {
         Objective? currentObjective = gameState.CurrentObjective;
@@ -33,7 +36,12 @@ public class NoObersPointsCounter : IPointsCounter
         List<IPlayer> players = gameState.Players;
         Dictionary<IPlayer, int> pointsInThisDeal = players.ToDictionary(player => player, player => 0);
 
-        List<Card> allPlayedCardsInDeal = gameState.AllPlayedCardsInDeal;
+        List<Card?> allPlayedCardsInDeal = gameState.AllPlayedCardsInDeal;
+        if (allPlayedCardsInDeal.Any(card => card == null))
+        {
+            throw new ArgumentException($"The \"{allPlayedCardsInDeal.GetType()}\" passed to {nameof(NoObersPointsCounter)}.{nameof(CountPointsAfterDeal)} in {nameof(gameState)}.{nameof(GameState.AllPlayedCardsInDeal)} does include null which is not valid for the objective \"{Objective}\".");
+        }
+
         IPlayer? dealer = gameState.Dealer;
         if (dealer == null)
         {
@@ -44,7 +52,7 @@ public class NoObersPointsCounter : IPointsCounter
 
         for (int i = 0; i < gameState.AllPlayedCardsInDeal.Count; i += players.Count)
         {
-            List<Card> cardsInTrick = allPlayedCardsInDeal.GetRange(i, players.Count);
+            List<Card> cardsInTrick = allPlayedCardsInDeal.GetRange(i, players.Count)!;
             IPlayer playerWithTrick = GameHelpers.Instance.DeterminePlayerWithTrick(players, firstPlayer, cardsInTrick);
             int numberOfObersInTrick = cardsInTrick.Where(card => card.Rank == Rank.Ober).Count();
             pointsInThisDeal[playerWithTrick] += numberOfObersInTrick * PointsPerTrick;

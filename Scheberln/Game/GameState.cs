@@ -32,5 +32,5 @@ public record GameState(List<IPlayer> Players, Deck Deck)
     /// <summary>
     /// All played cards in the deal.
     /// </summary>
-    public List<Card> AllPlayedCardsInDeal { get; set; } = new List<Card>();
+    public List<Card?> AllPlayedCardsInDeal { get; set; } = new List<Card?>();
 }

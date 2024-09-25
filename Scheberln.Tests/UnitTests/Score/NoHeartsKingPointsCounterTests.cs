@@ -30,7 +30,7 @@ public class NoHeartsKingPointsCounterTests
             Dealer = player3,
         };
 
-        List<Card> playedCards = [
+        List<Card?> playedCards = [
             // trick 1 starts with player0 and is taken by player1
             new Card(Suit.Acorns, Rank.Eight),
             new Card(Suit.Acorns, Rank.Nine),
@@ -120,7 +120,7 @@ public class NoHeartsKingPointsCounterTests
             Dealer = player3,
         };
 
-        List<Card> playedCards = [
+        List<Card?> playedCards = [
             // trick 1 starts with player0 and is taken by player1
             new Card(Suit.Acorns, Rank.Eight),
             new Card(Suit.Acorns, Rank.Nine),
@@ -211,7 +211,7 @@ public class NoHeartsKingPointsCounterTests
             Dealer = player3,
         };
 
-        List<Card> playedCards = [
+        List<Card?> playedCards = [
             // trick 1 starts with player0 and is taken by player1
             new Card(Suit.Acorns, Rank.Eight),
             new Card(Suit.Acorns, Rank.Nine),
@@ -292,7 +292,7 @@ public class NoHeartsKingPointsCounterTests
             Dealer = player3,
         };
 
-        List<Card> playedCards = [
+        List<Card?> playedCards = [
             // trick 1 starts with player0 and is taken by player1
             new Card(Suit.Acorns, Rank.Eight),
             new Card(Suit.Acorns, Rank.Nine),
@@ -371,7 +371,7 @@ public class NoHeartsKingPointsCounterTests
             Dealer = player2,
         };
 
-        List<Card> playedCards = [
+        List<Card?> playedCards = [
             // trick 1 starts with player0 and is taken by player1
             new Card(Suit.Acorns, Rank.Eight),
             new Card(Suit.Acorns, Rank.Nine),
@@ -464,7 +464,7 @@ public class NoHeartsKingPointsCounterTests
             Dealer = player2,
         };
 
-        List<Card> playedCards = [
+        List<Card?> playedCards = [
             // trick 1
             new Card(Suit.Acorns, Rank.Eight),
             new Card(Suit.Acorns, Rank.Nine),
@@ -553,7 +553,7 @@ public class NoHeartsKingPointsCounterTests
             Dealer = player2,
         };
 
-        List<Card> playedCards = [
+        List<Card?> playedCards = [
             // trick 1 starts with player3 and is taken by player4
             new Card(Suit.Acorns, Rank.Eight),
             new Card(Suit.Acorns, Rank.Nine),
@@ -644,7 +644,7 @@ public class NoHeartsKingPointsCounterTests
             Dealer = player2,
         };
 
-        List<Card> playedCards = [
+        List<Card?> playedCards = [
             // trick 1
             new Card(Suit.Acorns, Rank.Eight),
             new Card(Suit.Acorns, Rank.Nine),
@@ -723,7 +723,7 @@ public class NoHeartsKingPointsCounterTests
             Dealer = null,
         };
 
-        List<Card> playedCards = [
+        List<Card?> playedCards = [
             // trick 1 starts with player0 and is taken by player1
             new Card(Suit.Acorns, Rank.Eight),
             new Card(Suit.Acorns, Rank.Nine),
@@ -805,7 +805,7 @@ public class NoHeartsKingPointsCounterTests
             Dealer = dealer,
         };
 
-        List<Card> playedCards = [
+        List<Card?> playedCards = [
             // trick 1 starts with player0 and is taken by player1
             new Card(Suit.Acorns, Rank.Eight),
             new Card(Suit.Acorns, Rank.Nine),
@@ -886,7 +886,7 @@ public class NoHeartsKingPointsCounterTests
             Dealer = player3,
         };
 
-        List<Card> playedCards = [
+        List<Card?> playedCards = [
             // trick 1 starts with player0 and is taken by player1
             new Card(Suit.Acorns, Rank.Eight),
             new Card(Suit.Acorns, Rank.Nine),
@@ -929,5 +929,86 @@ public class NoHeartsKingPointsCounterTests
         };
 
         Assert.That(actualPoints, Is.EquivalentTo(expectedPoints));
+    }
+
+    [Test]
+    public void TestCountPointsAfterDeal_WhenCalledWithNullInCards_ThrowsArgumentException()
+    {
+        // arrange
+        IPlayer player0 = new FakePlayer();
+        IPlayer player1 = new FakePlayer();
+        IPlayer player2 = new FakePlayer();
+        IPlayer player3 = new FakePlayer();
+        List<IPlayer> players = [
+            player0,
+            player1,
+            player2,
+            player3,
+        ];
+
+        GameState gameState = new(players, null!)
+        {
+            CurrentObjective = Objective.NoHeartsKing,
+            Dealer = player3,
+        };
+
+        List<Card?> playedCards = [
+            // trick 1 starts with player0 and is taken by player1
+            new Card(Suit.Acorns, Rank.Eight),
+            new Card(Suit.Acorns, Rank.Nine),
+            new Card(Suit.Acorns, Rank.Seven),
+            new Card(Suit.Hearts, Rank.Ace),
+
+            // trick 2 starts with player1 and is taken by player0
+            new Card(Suit.Hearts, Rank.Eight),
+            null,
+            new Card(Suit.Hearts, Rank.Nine),
+            new Card(Suit.Hearts, Rank.King),
+
+            // trick 3 starts with player0 and is taken by player0
+            new Card(Suit.Leaves, Rank.Ten),
+            new Card(Suit.Leaves, Rank.Eight),
+            new Card(Suit.Leaves, Rank.Nine),
+            new Card(Suit.Leaves, Rank.Seven),
+
+            // trick 4 starts with player0 and is taken by player1
+            new Card(Suit.Leaves, Rank.Ober),
+            new Card(Suit.Leaves, Rank.King),
+            new Card(Suit.Leaves, Rank.Unter),
+            new Card(Suit.Hearts, Rank.Ober),
+
+            // trick 5 starts with player1 and is taken by player3
+            new Card(Suit.Hearts, Rank.Ten),
+            new Card(Suit.Acorns, Rank.King),
+            new Card(Suit.Hearts, Rank.Unter),
+            new Card(Suit.Acorns, Rank.Ace),
+
+            // trick 6 starts with player3 and is taken by player1
+            new Card(Suit.Bells, Rank.Ten),
+            new Card(Suit.Bells, Rank.Eight),
+            new Card(Suit.Bells, Rank.Unter),
+            new Card(Suit.Bells, Rank.Nine),
+
+            // trick 7 starts with player1 and is taken by player2
+            new Card(Suit.Bells, Rank.Ober),
+            new Card(Suit.Bells, Rank.Ace),
+            new Card(Suit.Acorns, Rank.Ober),
+            new Card(Suit.Bells, Rank.King),
+
+            // trick 8 starts with player2 and is taken by player2
+            new Card(Suit.Acorns, Rank.Unter),
+            new Card(Suit.Acorns, Rank.Ten),
+            new Card(Suit.Bells, Rank.Seven),
+            new Card(Suit.Leaves, Rank.Ace),
+        ];
+
+        gameState.AllPlayedCardsInDeal = playedCards;
+
+        NoHeartsKingPointsCounter noHeartsKingPointsCounter = new();
+
+        // act/assert
+        ArgumentException thrownException = Assert.Throws<ArgumentException>(() => noHeartsKingPointsCounter.CountPointsAfterDeal(gameState));
+
+        Assert.That(thrownException.Message, Is.EqualTo("The \"System.Collections.Generic.List`1[Scheberln.Cards.Card]\" passed to NoHeartsKingPointsCounter.CountPointsAfterDeal in gameState.AllPlayedCardsInDeal does include null which is not valid for the objective \"NoHeartsKing\"."));
     }
 }
