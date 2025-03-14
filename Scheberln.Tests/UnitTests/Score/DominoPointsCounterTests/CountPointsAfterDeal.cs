@@ -4,9 +4,9 @@ using Scheberln.Players;
 using Scheberln.Score;
 using Scheberln.Tests.Fakes;
 
-namespace Scheberln.Tests.UnitTests.Score;
+namespace Scheberln.Tests.UnitTests.Score.DominoPointsCounterTest;
 
-public class DominoPointsCounterTest
+public class CountPointsAfterDeal
 {
 
     [Test]
