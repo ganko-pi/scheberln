@@ -83,4 +83,17 @@ public class GameHelpers
         int indexOfNextPlayer = (indexOfCurrentPlayer + 1) % players.Count;
         return players[indexOfNextPlayer];
     }
+
+    /// <summary>
+    /// Returns the <see cref="Objective"/> which is next after <paramref name="currentObjective"/>.
+    /// </summary>
+    /// <param name="currentObjective">The <see cref="Objective"/> before the <see cref="Objective"/> to find.</param>
+    /// <returns>The <see cref="Objective"/> which is next after <paramref name="currentObjective"/>.</returns>
+    public Objective GetNextObjective(Objective currentObjective)
+    {
+        Objective[] objectiveValues = Enum.GetValues<Objective>();
+        int indexOfCurrentObjective = Array.IndexOf(objectiveValues, currentObjective);
+        int indexOfNextObjective = (indexOfCurrentObjective + 1) % objectiveValues.Length;
+        return objectiveValues[indexOfNextObjective];
+    }
 }
