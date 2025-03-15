@@ -37,7 +37,7 @@ public class NoTricksPointsCounter : IPointsCounter
         Dictionary<IPlayer, int> pointsInThisDeal = players.ToDictionary(player => player, player => 0);
 
         List<Card?> allPlayedCardsInDeal = gameState.AllPlayedCardsInDeal;
-        if (allPlayedCardsInDeal.Any(card => card == null))
+        if (allPlayedCardsInDeal.Contains(null))
         {
             throw new ArgumentException($"The \"{allPlayedCardsInDeal.GetType()}\" passed to {nameof(NoTricksPointsCounter)}.{nameof(CountPointsAfterDeal)} in {nameof(gameState)}.{nameof(GameState.AllPlayedCardsInDeal)} does include null which is not valid for the objective \"{Objective}\".");
         }
