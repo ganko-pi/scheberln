@@ -31,6 +31,23 @@ public class GameHelpers
     }
 
     /// <summary>
+    /// Returns the first <see cref="Card"/> of the latest trick. If a trick is closed, <see langword="null"/> is returned.
+    /// </summary>
+    /// <param name="gameState">The state of a game.</param>
+    /// <returns>The first <see cref="Card"/> of the latest trick.</returns>
+    public Card? GetFirstCardOfCurrentTrick(GameState gameState)
+    {
+        List<Card?> allPlayedCardsInDeal = gameState.AllPlayedCardsInDeal;
+        int currentTrickStartsAtIndex = GetIndexOfFirstCardOfCurrentTrick(gameState);
+        if (allPlayedCardsInDeal.Count == currentTrickStartsAtIndex)
+        {
+            return null;
+        }
+
+        return allPlayedCardsInDeal[currentTrickStartsAtIndex];
+    }
+
+    /// <summary>
     /// Returns the <see cref="IPlayer"/> from <paramref name="players"/> who played the trick-taking <see cref="Card"/> in <paramref name="cardsInTrick"/>.
     /// </summary>
     /// <param name="players">The <see cref="IPlayer"/>s participating in the game.</param>
