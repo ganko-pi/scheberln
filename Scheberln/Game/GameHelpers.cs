@@ -18,6 +18,19 @@ public class GameHelpers
     public static GameHelpers Instance { get; set; } = new GameHelpers();
 
     /// <summary>
+    /// Determines at which index the latest trick in <see cref="GameState.AllPlayedCardsInDeal"/> starts. If a trick is closed, the index of the next trick is returned which is not started yet.
+    /// </summary>
+    /// <param name="gameState">The state of a game.</param>
+    /// <returns>The index which <see cref="Card"/> in <see cref="GameState.AllPlayedCardsInDeal"/> is the first of the current trick.</returns>
+    public int GetIndexOfFirstCardOfCurrentTrick(GameState gameState)
+    {
+        List<IPlayer> players = gameState.Players;
+        List<Card?> allPlayedCardsInDeal = gameState.AllPlayedCardsInDeal;
+        int currentTrickStartsAtIndex = allPlayedCardsInDeal.Count / players.Count * players.Count;
+        return currentTrickStartsAtIndex;
+    }
+
+    /// <summary>
     /// Returns the <see cref="IPlayer"/> from <paramref name="players"/> who played the trick-taking <see cref="Card"/> in <paramref name="cardsInTrick"/>.
     /// </summary>
     /// <param name="players">The <see cref="IPlayer"/>s participating in the game.</param>
