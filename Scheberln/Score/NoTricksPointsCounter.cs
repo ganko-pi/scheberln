@@ -33,30 +33,19 @@ public class NoTricksPointsCounter : IPointsCounter
             throw new ArgumentException($"The objective \"{currentObjective}\" passed to {nameof(CountPointsAfterDeal)} in {nameof(gameState)}.{nameof(GameState.CurrentObjective)} does not match the objective \"{Objective}\" of class {nameof(NoTricksPointsCounter)}.");
         }
 
-        List<IPlayer> players = gameState.Players;
-        Dictionary<IPlayer, int> pointsInThisDeal = players.ToDictionary(player => player, player => 0);
-
         List<Card?> allPlayedCardsInDeal = gameState.AllPlayedCardsInDeal;
         if (allPlayedCardsInDeal.Contains(null))
         {
             throw new ArgumentException($"The \"{allPlayedCardsInDeal.GetType()}\" passed to {nameof(NoTricksPointsCounter)}.{nameof(CountPointsAfterDeal)} in {nameof(gameState)}.{nameof(GameState.AllPlayedCardsInDeal)} does include null which is not valid for the objective \"{Objective}\".");
         }
 
-        IPlayer? dealer = gameState.Dealer;
-        if (dealer == null)
-        {
-            throw new ArgumentException($"Dealer in {nameof(NoTricksPointsCounter)}.{nameof(CountPointsAfterDeal)} is null.");
-        }
-
-        IPlayer firstPlayer = GameHelpers.Instance.GetNextPlayer(players, dealer);
-
-        for (int i = 0; i < gameState.AllPlayedCardsInDeal.Count; i += players.Count)
-        {
-            List<Card> cardsInTrick = allPlayedCardsInDeal.GetRange(i, players.Count)!;
-            IPlayer playerWithTrick = GameHelpers.Instance.DeterminePlayerWithTrick(players, firstPlayer, cardsInTrick);
-            pointsInThisDeal[playerWithTrick] += PointsPerTrick;
-            firstPlayer = playerWithTrick;
-        }
+        List<IPlayer> playersWithTricks = GameHelpers.Instance.GetPlayersWithTricks(gameState);
+        // Add all players again to have each player represented at least once and decrease the count by one.
+        // Otherwise, players with no tricks are not in the resulting dictionary.
+        playersWithTricks.AddRange(gameState.Players);
+        Dictionary<IPlayer, int> pointsInThisDeal = playersWithTricks
+            .GroupBy(player => player)
+            .ToDictionary(group => group.Key, group => (group.Count() - 1) * PointsPerTrick);
 
         return pointsInThisDeal;
     }

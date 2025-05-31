@@ -126,4 +126,36 @@ public class GameHelpers
         int indexOfNextObjective = (indexOfCurrentObjective + 1) % objectiveValues.Length;
         return objectiveValues[indexOfNextObjective];
     }
+
+    /// <summary>
+    /// Returns a <see cref="List{T}"/> containing the <see cref="IPlayer"/>s with tricks ordered by the progress of the deal when they got the trick.
+    /// </summary>
+    /// <param name="gameState">The state of a game.</param>
+    /// <returns>A <see cref="List{T}"/> containing the <see cref="IPlayer"/>s with tricks ordered by the progress of the deal when they got the trick.</returns>
+    /// <exception cref="ArgumentException">
+    /// Exception if the <see cref="GameState.Dealer"/> is <see langword="null"/>.
+    /// </exception>
+    public List<IPlayer> GetPlayersWithTricks(GameState gameState)
+    {
+        List<IPlayer> players = gameState.Players;
+        List<Card?> allPlayedCardsInDeal = gameState.AllPlayedCardsInDeal;
+
+        IPlayer? dealer = gameState.Dealer;
+        if (dealer == null)
+        {
+            throw new ArgumentException($"Dealer in {nameof(GameHelpers)}.{nameof(GetPlayersWithTricks)} is null.");
+        }
+
+        IPlayer firstPlayer = GetNextPlayer(players, dealer);
+        List<IPlayer> playersWithTricks = new List<IPlayer>();
+        for (int i = 0; i < allPlayedCardsInDeal.Count; i += players.Count)
+        {
+            List<Card> cardsInTrick = allPlayedCardsInDeal.GetRange(i, players.Count)!;
+            IPlayer playerWithTrick = DeterminePlayerWithTrick(players, firstPlayer, cardsInTrick);
+            playersWithTricks.Add(playerWithTrick);
+            firstPlayer = playerWithTrick;
+        }
+
+        return playersWithTricks;
+    }
 }

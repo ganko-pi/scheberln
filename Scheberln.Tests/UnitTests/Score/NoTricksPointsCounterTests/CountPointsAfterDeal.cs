@@ -596,7 +596,7 @@ public class CountPointsAfterDeal
         // act/assert
         ArgumentException thrownException = Assert.Throws<ArgumentException>(() => noTricksPointsCounter.CountPointsAfterDeal(gameState));
 
-        Assert.That(thrownException.Message, Is.EqualTo("Dealer in NoTricksPointsCounter.CountPointsAfterDeal is null."));
+        Assert.That(thrownException.Message, Is.EqualTo("Dealer in GameHelpers.GetPlayersWithTricks is null."));
     }
 
     [Test]
