@@ -10,7 +10,7 @@ public class IsFullfilled
 {
 
     [Test]
-    public void TestIsFulfilled_FirstCardInDealIsNoHearts_ReturnsTrue()
+    public void TestIsFullfilled_FirstCardInDealIsNoHearts_ReturnsTrue()
     {
         // arrange
         IPlayer player0 = new FakePlayer();
@@ -48,7 +48,7 @@ public class IsFullfilled
     }
 
     [Test]
-    public void TestIsFulfilled_FirstCardInDealIsHearts_ReturnsFalse()
+    public void TestIsFullfilled_FirstCardInDealIsHearts_ReturnsFalse()
     {
         // arrange
         IPlayer player0 = new FakePlayer();
@@ -86,7 +86,7 @@ public class IsFullfilled
     }
 
     [Test]
-    public void TestIsFulfilled_SecondCardInDealIsNoHearts_ReturnsTrue()
+    public void TestIsFullfilled_SecondCardInDealIsNoHearts_ReturnsTrue()
     {
         // arrange
         IPlayer player0 = new FakePlayer();
@@ -126,7 +126,7 @@ public class IsFullfilled
     }
 
     [Test]
-    public void TestIsFulfilled_SecondCardInDealIsHearts_ReturnsTrue()
+    public void TestIsFullfilled_SecondCardInDealIsHearts_ReturnsTrue()
     {
         // arrange
         IPlayer player0 = new FakePlayer();
@@ -166,7 +166,7 @@ public class IsFullfilled
     }
 
     [Test]
-    public void TestIsFulfilled_FirstCardInDealIsNull_ReturnsTrue()
+    public void TestIsFullfilled_FirstCardInDealIsNull_ReturnsTrue()
     {
         // arrange
         IPlayer player0 = new FakePlayer();

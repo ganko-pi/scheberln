@@ -10,7 +10,7 @@ public class IsFullfilled
 {
 
     [Test]
-    public void TestIsFulfilled_WhenPlayingAcornsUnter_ReturnsTrue()
+    public void TestIsFullfilled_WhenPlayingAcornsUnter_ReturnsTrue()
     {
         // arrange
         Card cardThePlayerWantsToPlay = new(Suit.Acorns, Rank.Unter);
@@ -26,7 +26,7 @@ public class IsFullfilled
     }
 
     [Test]
-    public void TestIsFulfilled_WhenNotPlayingAcornsUnterAndHasNoAcornsUnter_ReturnsTrue()
+    public void TestIsFullfilled_WhenNotPlayingAcornsUnterAndHasNoAcornsUnter_ReturnsTrue()
     {
         // arrange
         IPlayer player0 = new FakePlayer();
@@ -69,7 +69,7 @@ public class IsFullfilled
     }
 
     [Test]
-    public void TestIsFulfilled_WhenNotPlayingAcornsUnterAndHasAcornsUnter_ReturnsFalse()
+    public void TestIsFullfilled_WhenNotPlayingAcornsUnterAndHasAcornsUnter_ReturnsFalse()
     {
         // arrange
         IPlayer player0 = new FakePlayer();

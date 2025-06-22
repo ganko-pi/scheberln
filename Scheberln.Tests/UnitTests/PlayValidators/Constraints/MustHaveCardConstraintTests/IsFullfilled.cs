@@ -10,7 +10,7 @@ public class IsFullfilled
 {
     
     [Test]
-    public void TestIsFulfilled_PlayerHasCard_ReturnsTrue()
+    public void TestIsFullfilled_PlayerHasCard_ReturnsTrue()
     {
         // arrange
         IPlayer player0 = new FakePlayer();
@@ -54,7 +54,7 @@ public class IsFullfilled
     }
 
     [Test]
-    public void TestIsFulfilled_PlayerDoesNotHaveCard_ReturnsFalse()
+    public void TestIsFullfilled_PlayerDoesNotHaveCard_ReturnsFalse()
     {
         // arrange
         IPlayer player0 = new FakePlayer();
@@ -98,7 +98,7 @@ public class IsFullfilled
     }
 
     [Test]
-    public void TestIsFulfilled_CardIsNull_ReturnsTrue()
+    public void TestIsFullfilled_CardIsNull_ReturnsTrue()
     {
         // arrange
         IPlayer player0 = new FakePlayer();

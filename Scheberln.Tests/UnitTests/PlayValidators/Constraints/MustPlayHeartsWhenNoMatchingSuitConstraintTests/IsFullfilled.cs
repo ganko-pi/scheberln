@@ -4,21 +4,21 @@ using Scheberln.Players;
 using Scheberln.PlayValidators.Constraints;
 using Scheberln.Tests.Fakes;
 
-namespace Scheberln.Tests.UnitTests.PlayValidators.Constraints.MustPlayHeartsKingWhenNoMatchingSuitConstraintTests;
+namespace Scheberln.Tests.UnitTests.PlayValidators.Constraints.MustPlayHeartsWhenNoMatchingSuitConstraintTests;
 
 public class IsFullfilled
 {
 
     [Test]
-    public void TestIsFulfilled_WhenPlayingHeartsKing_ReturnsTrue()
+    public void TestIsFullfilled_WhenPlayingHearts_ReturnsTrue()
     {
         // arrange
-        Card cardThePlayerWantsToPlay = new(Suit.Hearts, Rank.King);
+        Card cardThePlayerWantsToPlay = new(Suit.Hearts, Rank.Eight);
         
-        MustPlayHeartsKingWhenNoMatchingSuitConstraint mustPlayHeartsKingWhenNoMatchingSuitConstraint = new();
+        MustPlayHeartsWhenNoMatchingSuitConstraint mustPlayHeartsWhenNoMatchingSuitConstraint = new();
 
         // act
-        bool actualResult = mustPlayHeartsKingWhenNoMatchingSuitConstraint.IsFullfilled(null!, null!, cardThePlayerWantsToPlay);
+        bool actualResult = mustPlayHeartsWhenNoMatchingSuitConstraint.IsFullfilled(null!, null!, cardThePlayerWantsToPlay);
 
         // assert
         bool expectedResult = true;
@@ -26,7 +26,7 @@ public class IsFullfilled
     }
 
     [Test]
-    public void TestIsFulfilled_WhenPlayingSuitOfTrickOtherThanHeartsAndHasNoHeartsKing_ReturnsTrue()
+    public void TestIsFullfilled_WhenPlayingSuitOfTrickOtherThanHeartsAndHasNoHearts_ReturnsTrue()
     {
         // arrange
         IPlayer player0 = new FakePlayer();
@@ -60,10 +60,10 @@ public class IsFullfilled
             new Card(Suit.Leaves, Rank.Ober),
         ];
         
-        MustPlayHeartsKingWhenNoMatchingSuitConstraint mustPlayHeartsKingWhenNoMatchingSuitConstraint = new();
+        MustPlayHeartsWhenNoMatchingSuitConstraint mustPlayHeartsWhenNoMatchingSuitConstraint = new();
 
         // act
-        bool actualResult = mustPlayHeartsKingWhenNoMatchingSuitConstraint.IsFullfilled(gameState, currentPlayer, cardThePlayerWantsToPlay);
+        bool actualResult = mustPlayHeartsWhenNoMatchingSuitConstraint.IsFullfilled(gameState, currentPlayer, cardThePlayerWantsToPlay);
 
         // assert
         bool expectedResult = true;
@@ -71,7 +71,7 @@ public class IsFullfilled
     }
 
     [Test]
-    public void TestIsFulfilled_WhenPlayingSuitOfTrickOtherThanHeartsAndHasHeartsKing_ReturnsTrue()
+    public void TestIsFullfilled_WhenPlayingSuitOfTrickOtherThanHeartsAndHasHearts_ReturnsTrue()
     {
 // arrange
         IPlayer player0 = new FakePlayer();
@@ -101,14 +101,14 @@ public class IsFullfilled
         Card cardThePlayerWantsToPlay = new(Suit.Acorns, Rank.Eight);
         currentPlayer.Cards = [
             cardThePlayerWantsToPlay,
-            new Card(Suit.Hearts, Rank.King),
+            new Card(Suit.Hearts, Rank.Nine),
             new Card(Suit.Leaves, Rank.Ober),
         ];
         
-        MustPlayHeartsKingWhenNoMatchingSuitConstraint mustPlayHeartsKingWhenNoMatchingSuitConstraint = new();
+        MustPlayHeartsWhenNoMatchingSuitConstraint mustPlayHeartsWhenNoMatchingSuitConstraint = new();
 
         // act
-        bool actualResult = mustPlayHeartsKingWhenNoMatchingSuitConstraint.IsFullfilled(gameState, currentPlayer, cardThePlayerWantsToPlay);
+        bool actualResult = mustPlayHeartsWhenNoMatchingSuitConstraint.IsFullfilled(gameState, currentPlayer, cardThePlayerWantsToPlay);
 
         // assert
         bool expectedResult = true;
@@ -116,7 +116,7 @@ public class IsFullfilled
     }
 
     [Test]
-    public void TestIsFulfilled_WhenNotPlayingSuitOfTrickOtherThanHeartsAndHasNoHeartsKing_ReturnsTrue()
+    public void TestIsFullfilled_WhenNotPlayingSuitOfTrickOtherThanHeartsAndHasNoHearts_ReturnsTrue()
     {
         // arrange
         IPlayer player0 = new FakePlayer();
@@ -150,10 +150,10 @@ public class IsFullfilled
             new Card(Suit.Leaves, Rank.Ober),
         ];
         
-        MustPlayHeartsKingWhenNoMatchingSuitConstraint mustPlayHeartsKingWhenNoMatchingSuitConstraint = new();
+        MustPlayHeartsWhenNoMatchingSuitConstraint mustPlayHeartsWhenNoMatchingSuitConstraint = new();
 
         // act
-        bool actualResult = mustPlayHeartsKingWhenNoMatchingSuitConstraint.IsFullfilled(gameState, currentPlayer, cardThePlayerWantsToPlay);
+        bool actualResult = mustPlayHeartsWhenNoMatchingSuitConstraint.IsFullfilled(gameState, currentPlayer, cardThePlayerWantsToPlay);
 
         // assert
         bool expectedResult = true;
@@ -161,7 +161,7 @@ public class IsFullfilled
     }
 
     [Test]
-    public void TestIsFulfilled_WhenNotPlayingSuitOfTrickOtherThanHeartsAndHasHeartsKing_ReturnsFalse()
+    public void TestIsFullfilled_WhenNotPlayingSuitOfTrickOtherThanHeartsAndHasHearts_ReturnsFalse()
     {
         // arrange
         IPlayer player0 = new FakePlayer();
@@ -191,14 +191,14 @@ public class IsFullfilled
         Card cardThePlayerWantsToPlay = new(Suit.Acorns, Rank.Eight);
         currentPlayer.Cards = [
             cardThePlayerWantsToPlay,
-            new Card(Suit.Hearts, Rank.King),
+            new Card(Suit.Hearts, Rank.Nine),
             new Card(Suit.Leaves, Rank.Ober),
         ];
         
-        MustPlayHeartsKingWhenNoMatchingSuitConstraint mustPlayHeartsKingWhenNoMatchingSuitConstraint = new();
+        MustPlayHeartsWhenNoMatchingSuitConstraint mustPlayHeartsWhenNoMatchingSuitConstraint = new();
 
         // act
-        bool actualResult = mustPlayHeartsKingWhenNoMatchingSuitConstraint.IsFullfilled(gameState, currentPlayer, cardThePlayerWantsToPlay);
+        bool actualResult = mustPlayHeartsWhenNoMatchingSuitConstraint.IsFullfilled(gameState, currentPlayer, cardThePlayerWantsToPlay);
 
         // assert
         bool expectedResult = false;
@@ -206,97 +206,7 @@ public class IsFullfilled
     }
 
     [Test]
-    public void TestIsFulfilled_WhenPlayingHeartsAsSuitOfTrickAndHasNoHeartsKing_ReturnsTrue()
-    {
-        // arrange
-        IPlayer player0 = new FakePlayer();
-        IPlayer player1 = new FakePlayer();
-        IPlayer player2 = new FakePlayer();
-        IPlayer player3 = new FakePlayer();
-        List<IPlayer> players = [
-            player0,
-            player1,
-            player2,
-            player3,
-        ];
-
-        GameState gameState = new(players, null!)
-        {
-            CurrentObjective = Objective.NoTricks,
-            Dealer = player3,
-        };
-
-        List<Card?> playedCards = [
-            new Card(Suit.Hearts, Rank.Nine),
-        ];
-
-        gameState.AllPlayedCardsInDeal = playedCards;
-
-        IPlayer currentPlayer = player0;
-        Card cardThePlayerWantsToPlay = new(Suit.Hearts, Rank.Eight);
-        currentPlayer.Cards = [
-            cardThePlayerWantsToPlay,
-            new Card(Suit.Acorns, Rank.Nine),
-            new Card(Suit.Leaves, Rank.Ober),
-        ];
-        
-        MustPlayHeartsKingWhenNoMatchingSuitConstraint mustPlayHeartsKingWhenNoMatchingSuitConstraint = new();
-
-        // act
-        bool actualResult = mustPlayHeartsKingWhenNoMatchingSuitConstraint.IsFullfilled(gameState, currentPlayer, cardThePlayerWantsToPlay);
-
-        // assert
-        bool expectedResult = true;
-        Assert.That(actualResult, Is.EqualTo(expectedResult));
-    }
-
-    [Test]
-    public void TestIsFulfilled_WhenPlayingHeartsAsSuitOfTrickAndHasHeartsKing_ReturnsTrue()
-    {
-        // arrange
-        IPlayer player0 = new FakePlayer();
-        IPlayer player1 = new FakePlayer();
-        IPlayer player2 = new FakePlayer();
-        IPlayer player3 = new FakePlayer();
-        List<IPlayer> players = [
-            player0,
-            player1,
-            player2,
-            player3,
-        ];
-
-        GameState gameState = new(players, null!)
-        {
-            CurrentObjective = Objective.NoTricks,
-            Dealer = player3,
-        };
-
-        List<Card?> playedCards = [
-            new Card(Suit.Hearts, Rank.Nine),
-        ];
-
-        gameState.AllPlayedCardsInDeal = playedCards;
-
-        IPlayer currentPlayer = player0;
-        Card cardThePlayerWantsToPlay = new(Suit.Hearts, Rank.Eight);
-        currentPlayer.Cards = [
-            cardThePlayerWantsToPlay,
-            new Card(Suit.Hearts, Rank.King),
-            new Card(Suit.Leaves, Rank.Ober),
-        ];
-        
-        MustPlayHeartsKingWhenNoMatchingSuitConstraint mustPlayHeartsKingWhenNoMatchingSuitConstraint = new();
-
-        // act
-        bool actualResult = mustPlayHeartsKingWhenNoMatchingSuitConstraint.IsFullfilled(gameState, currentPlayer, cardThePlayerWantsToPlay);
-
-        // assert
-        bool expectedResult = true;
-        Assert.That(actualResult, Is.EqualTo(expectedResult));
-    }
-
-    [Test]
-    public void TestIsFulfilled_WhenPlayingNoHeartsKingAsFirstCard_ReturnsTrue()
+    public void TestIsFullfilled_WhenPlayingNoHeartsAsFirstCard_ReturnsTrue()
     {
         // arrange
         IPlayer player0 = new FakePlayer();
@@ -324,14 +234,14 @@ public class IsFullfilled
         Card cardThePlayerWantsToPlay = new(Suit.Acorns, Rank.Eight);
         currentPlayer.Cards = [
             cardThePlayerWantsToPlay,
-            new Card(Suit.Hearts, Rank.King),
+            new Card(Suit.Acorns, Rank.Nine),
             new Card(Suit.Leaves, Rank.Ober),
         ];
         
-        MustPlayHeartsKingWhenNoMatchingSuitConstraint mustPlayHeartsKingWhenNoMatchingSuitConstraint = new();
+        MustPlayHeartsWhenNoMatchingSuitConstraint mustPlayHeartsWhenNoMatchingSuitConstraint = new();
 
         // act
-        bool actualResult = mustPlayHeartsKingWhenNoMatchingSuitConstraint.IsFullfilled(gameState, currentPlayer, cardThePlayerWantsToPlay);
+        bool actualResult = mustPlayHeartsWhenNoMatchingSuitConstraint.IsFullfilled(gameState, currentPlayer, cardThePlayerWantsToPlay);
 
         // assert
         bool expectedResult = true;
@@ -339,7 +249,7 @@ public class IsFullfilled
     }
 
     [Test]
-    public void TestIsFulfilled_WhenPlayingNullAndHasNoHeartsKing_ReturnsTrue()
+    public void TestIsFullfilled_WhenPlayingNullAndHasNoHearts_ReturnsTrue()
     {
         // arrange
         IPlayer player0 = new FakePlayer();
@@ -373,10 +283,10 @@ public class IsFullfilled
             new Card(Suit.Leaves, Rank.Ober),
         ];
         
-        MustPlayHeartsKingWhenNoMatchingSuitConstraint mustPlayHeartsKingWhenNoMatchingSuitConstraint = new();
+        MustPlayHeartsWhenNoMatchingSuitConstraint mustPlayHeartsWhenNoMatchingSuitConstraint = new();
 
         // act
-        bool actualResult = mustPlayHeartsKingWhenNoMatchingSuitConstraint.IsFullfilled(gameState, currentPlayer, cardThePlayerWantsToPlay);
+        bool actualResult = mustPlayHeartsWhenNoMatchingSuitConstraint.IsFullfilled(gameState, currentPlayer, cardThePlayerWantsToPlay);
 
         // assert
         bool expectedResult = true;
@@ -384,7 +294,7 @@ public class IsFullfilled
     }
 
     [Test]
-    public void TestIsFulfilled_WhenPlayingNullAndHasHeartsKing_ReturnsFalse()
+    public void TestIsFullfilled_WhenPlayingNullAndHasHearts_ReturnsFalse()
     {
         // arrange
         IPlayer player0 = new FakePlayer();
@@ -414,14 +324,14 @@ public class IsFullfilled
         Card? cardThePlayerWantsToPlay = null;
         currentPlayer.Cards = [
             new Card(Suit.Acorns, Rank.Eight),
-            new Card(Suit.Hearts, Rank.King),
+            new Card(Suit.Hearts, Rank.Nine),
             new Card(Suit.Leaves, Rank.Ober),
         ];
         
-        MustPlayHeartsKingWhenNoMatchingSuitConstraint mustPlayHeartsKingWhenNoMatchingSuitConstraint = new();
+        MustPlayHeartsWhenNoMatchingSuitConstraint mustPlayHeartsWhenNoMatchingSuitConstraint = new();
 
         // act
-        bool actualResult = mustPlayHeartsKingWhenNoMatchingSuitConstraint.IsFullfilled(gameState, currentPlayer, cardThePlayerWantsToPlay);
+        bool actualResult = mustPlayHeartsWhenNoMatchingSuitConstraint.IsFullfilled(gameState, currentPlayer, cardThePlayerWantsToPlay);
 
         // assert
         bool expectedResult = false;

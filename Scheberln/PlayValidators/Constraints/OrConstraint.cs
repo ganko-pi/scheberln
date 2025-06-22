@@ -8,7 +8,7 @@ namespace Scheberln.PlayValidators.Constraints;
 
 /// <summary>
 /// Implementation of <see cref="IConstraint"/> to combine multiple other <see cref="IConstraint"/>s.
-/// This constraint is fulfilled when at least one of the passed <see cref="IConstraint"/>s is fulfilled.
+/// This constraint is fullfilled when at least one of the passed <see cref="IConstraint"/>s is fullfilled.
 /// </summary>
 public class OrConstraint : IConstraint
 {

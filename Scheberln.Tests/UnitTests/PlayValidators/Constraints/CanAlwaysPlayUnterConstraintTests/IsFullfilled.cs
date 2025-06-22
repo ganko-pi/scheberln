@@ -3,11 +3,11 @@ using Scheberln.PlayValidators.Constraints;
 
 namespace Scheberln.Tests.UnitTests.PlayValidators.Constraints.CanAlwaysPlayUnterConstraintTests;
 
-public class IsFulfilled
+public class IsFullfilled
 {
     
     [Test]
-    public void TestIsFulfilled_WhenPlayingUnter_ReturnsTrue()
+    public void TestIsFullfilled_WhenPlayingUnter_ReturnsTrue()
     {
         // arrange
         Card cardThePlayerWantsToPlay = new(Suit.Hearts, Rank.Unter);
@@ -23,7 +23,7 @@ public class IsFulfilled
     }
     
     [Test]
-    public void TestIsFulfilled_WhenPlayingNoUnter_ReturnsFalse()
+    public void TestIsFullfilled_WhenPlayingNoUnter_ReturnsFalse()
     {
         // arrange
         Card cardThePlayerWantsToPlay = new(Suit.Hearts, Rank.Seven);
@@ -39,7 +39,7 @@ public class IsFulfilled
     }
     
     [Test]
-    public void TestIsFulfilled_WhenPlayingNull_ReturnsFalse()
+    public void TestIsFullfilled_WhenPlayingNull_ReturnsFalse()
     {
         // arrange
         Card? cardThePlayerWantsToPlay = null;

@@ -7,7 +7,7 @@ public class IsFullfilled
 {
     
     [Test]
-    public void TestIsFulfilled_CardIsNotNull_ReturnsTrue()
+    public void TestIsFullfilled_CardIsNotNull_ReturnsTrue()
     {
         // arrange
         MustPlayCardConstraint mustPlayCardConstraint = new();
@@ -22,7 +22,7 @@ public class IsFullfilled
     }
     
     [Test]
-    public void TestIsFulfilled_CardIsNull_ReturnsFalse()
+    public void TestIsFullfilled_CardIsNull_ReturnsFalse()
     {
         // arrange
         MustPlayCardConstraint mustPlayCardConstraint = new();
